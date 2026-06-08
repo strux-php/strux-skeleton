@@ -8,11 +8,7 @@ return new class implements ConfigInterface {
     public function toArray(): array
     {
         return [
-            'name' => 'Student Management System',
-
-            // 'domain' = DDD structure (src/Domain/Identity/Entity)
-            // 'standard' = Flat structure (src/Entity, src/Controller)
-            'mode' => env('APP_MODE', 'standard'),
+            'name' => 'Strux App',
 
             'meta' => [
                 'title' => env('META_TITLE', 'Student Management System - A Simple PHP Framework'),
@@ -21,7 +17,7 @@ return new class implements ConfigInterface {
             'env' => env('APP_ENV', 'development'), // or production, testing
             'debug' => (bool) env('APP_DEBUG', true),
             'url' => env('APP_URL', 'http://127.0.0.1:8000'),
-            'version' => '1.0.13',
+            'version' => '1.1.8',
             'timezone' => 'UTC',
             'sessions' => [
                 'driver' => 'file',

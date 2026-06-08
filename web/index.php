@@ -49,7 +49,7 @@ $elapsedTimeMiddleware = new class implements MiddlewareInterface {
         $response = $handler->handle($request);
         $body = (string) $response->getBody();
 
-        if (strpos($body, '{elapsed_time}') !== false) {
+        if (str_contains($body, '{elapsed_time}')) {
             $elapsed = round(microtime(true) - APP_START_TIME, 4);
             $body = str_replace('{elapsed_time}', (string) $elapsed, $body);
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Web;
 
-use Strux\Component\Attributes\Route;
 use Strux\Component\Http\Controller\Web\Controller;
 use Strux\Component\Http\Response;
+use Strux\Component\Routing\Attributes\Route;
 use Strux\Support\Bridge\Config;
 
 class WelcomeController extends Controller

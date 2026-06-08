@@ -7,7 +7,6 @@ namespace App;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use ReflectionException;
-use Strux\Bootstrapping\Kernel;
 use Strux\Foundation\Application;
 
 class App extends Application
@@ -16,15 +15,21 @@ class App extends Application
      * Factory method to create the application instance.
      *
      * @param string $rootPath
+     * @param array<string, string> $directories Optional directory overrides
+     * @param ?string $appClass Optional application class
      * @return self
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws ReflectionException
      */
-    public static function create(string $rootPath): self
+    public static function create(string $rootPath, ?string $appClass = null, array $directories = []): self
     {
         /** @var self $app */
-        $app = Kernel::create($rootPath, self::class);
+        $app = \Strux\Bootstrapping\Kernel::create(
+            $rootPath,
+            $appClass ?? self::class,
+            $directories
+        );
 
         return $app;
     }
