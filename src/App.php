@@ -37,6 +37,6 @@ class App extends Application
     // You can add custom helper methods here that you want available on $app instance
     public function version(): string
     {
-        return '1.0.0';
+        return config('app.version', '1.0.0');
     }
 }

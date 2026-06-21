@@ -4,24 +4,33 @@ declare(strict_types=1);
 
 namespace App\Domain\Identity\Entity;
 
-
-use App\Domain\Shared\Traits\TimestampMixin;
-use Strux\Component\Database\Schema\Attributes\Column;
-use Strux\Component\Database\Schema\Attributes\Id;
-use Strux\Component\Database\Schema\Attributes\Entity;
-use Strux\Component\Database\Schema\Attributes\Unique;
-use Strux\Component\Database\ORM\Attributes\OwnedByMany;
+use DateTimeInterface;
+use Strux\Component\Database\Schema as Schema;
+use Strux\Component\Database\ORM as ORM;
 use Strux\Support\Collection;
 
-#[Entity(table: 'permissions')]
+#[Schema\Attributes\Entity(table: 'permissions')]
 class Permissions extends \Strux\Auth\Entity\Permission
 {
-	use TimestampMixin;
+    #[ORM\Attributes\OwnedByMany(related: Roles::class)]
+    public Collection $roles {
+        get => $this->roles ?? new Collection();
+        set(Collection $value) => $value ?? new Collection();
+    }
 
-	#[OwnedByMany(related: Roles::class)]
-	public Collection $roles;
+    #[Schema\Attributes\Column(nullable: true)]
+    public ?string $description = null;
 
-	#[Column(nullable: true)]
-	public ?string $description = null;
+    #[Schema\Attributes\Column(
+        type: Schema\Types\Field::timestamp,
+        currentTimestamp: true
+    )]
+    public ?DateTimeInterface $createdAt = null;
+
+    #[Schema\Attributes\Column(
+        type: Schema\Types\Field::timestamp,
+        currentTimestamp: true,
+        onUpdateCurrentTimestamp: true
+    )]
+    public ?DateTimeInterface $updatedAt = null;
 }
-

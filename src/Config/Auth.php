@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use App\Domain\General\Entity\User;
+use App\Domain\Identity\Entity\User;
 use Strux\Component\Config\ConfigInterface;
 
 class Auth implements ConfigInterface
@@ -27,7 +27,9 @@ class Auth implements ConfigInterface
             */
             'defaults' => [
                 'sentinel' => 'web', // Default sentinel name
-                'redirect_to' => 'login', // Default route name or path after login
+                'redirect_to' => '/', // Default route name or path after login
+                'login_route' => 'auth.login', // Default login route name
+                'redirect_map' => [],
                 'next_parameter' => 'next', // The query parameter for intended URL
             ],
 
@@ -54,21 +56,6 @@ class Auth implements ConfigInterface
                     //'model' => \App\Domain\Identity\Entity\User::class,
                     'storage_key' => 'api_token', // The column name for the API token
                 ],
-            ],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Access Security
-            |--------------------------------------------------------------------------
-            |
-            | This array maps your models to their corresponding Access Authority
-            | class. These classes determine if a user is authorized to perform
-            | actions on a given model.
-            |
-            */
-            'authorities' => [
-                // \App\Domain\Ticketing\Entity\Ticket::class => \App\Domain\Ticketing\Security\TicketAuthority::class,
-                // \App\Models\Post::class => \App\Security\PostAuthority::class,
             ]
         ];
     }

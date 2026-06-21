@@ -1,3 +1,12 @@
+<?php
+
+/**
+ * @var string $controller_path
+ * @var string $view_path
+ */
+
+?>
+
 <?php $this->layout('layout', ['title' => 'Welcome to Strux']) ?>
 
 <div class="container">
