@@ -53,7 +53,7 @@ class Auth implements ConfigInterface
 
                 'api' => [
                     'driver' => 'token',
-                    //'model' => \App\Domain\Identity\Entity\User::class,
+                    // 'model' => User::class,
                     'storage_key' => 'api_token', // The column name for the API token
                 ],
             ]
