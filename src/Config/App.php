@@ -5,49 +5,57 @@ declare(strict_types=1);
 use Strux\Component\Config\ConfigInterface;
 
 return new class implements ConfigInterface {
-    public function toArray(): array
-    {
-        return [
-            'name' => 'Strux App',
-
-            'meta' => [
-                'title' => env('META_TITLE', 'Student Management System - A Simple PHP Framework'),
-                'description' => env('META_DESCRIPTION', 'A lightweight PHP framework for building web applications.'),
-            ],
-            'env' => env('APP_ENV', 'development'), // or production, testing
-            'debug' => (bool) env('APP_DEBUG', true),
-            'url' => env('APP_URL', 'http://127.0.0.1:8000'),
-            'version' => '1.3.0',
-            'timezone' => 'UTC',
-            'sessions' => [
-                'driver' => 'file',
-                'lifetime' => 120,
-                'expire_on_close' => false,
-                'path' => '/tmp',
-                'name' => 'session_id',
-                'domain' => null,
-                'secure' => false,
-                'http_only' => true,
-            ],
-            'csrf' => [
-                'token_name' => 'csrf_token',
-                'cookie_name' => 'csrf_cookie',
-                'expire' => 7200,
-                'secure' => false,
-                'http_only' => true,
-                'same_site' => null,
-            ],
-            'encryption' => [
-                'cipher' => 'AES-256-CBC',
-                'key' => 'random_key_32_bytes_long',
-                'cipher_mode' => 'CBC'
-            ],
-            'log' => [
-                'name' => 'app',
-                'driver' => 'file',
-                'path' => ROOT_PATH . '/var/logs',
-                'level' => 'debug',
-            ]
-        ];
-    }
+	public function toArray(): array
+	{
+		return [
+			'name' => 'My App',
+			'meta' => [
+				'title' => env('META_TITLE', 'My App - A Simple PHP Framework'),
+				'description' => env('META_DESCRIPTION', 'A lightweight PHP framework for building web applications.'),
+			],
+			'env' => env('APP_ENV', 'development'), // or production, testing
+			'debug' => (bool) env('APP_DEBUG', true),
+			'url' => env('APP_URL', 'http://127.0.0.1:8000'),
+			'version' => '1.1.8',
+			'timezone' => 'UTC',
+			'sessions' => [
+				'driver' => 'file',
+				'lifetime' => 120,
+				'expire_on_close' => false,
+				'path' => '/tmp',
+				'name' => 'session_id',
+				'domain' => null,
+				'secure' => false,
+				'http_only' => true,
+			],
+			'csrf' => [
+				'token_name' => 'csrf_token',
+				'cookie_name' => 'csrf_cookie',
+				'expire' => 7200,
+				'secure' => false,
+				'http_only' => true,
+				'same_site' => null,
+			],
+			'encryption' => [
+				'cipher' => env('ENCRYPTION_CIPHER', 'AES-256-CBC'),
+				'key' => env('ENCRYPTION_KEY', 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6'),
+				'cipher_mode' => 'CBC'
+			],
+			'log' => [
+				'name' => 'app',
+				'driver' => 'file',
+				'path' => ROOT_PATH . '/var/logs',
+				'level' => 'debug',
+			],
+			'rate_limiting' => [
+				'max_attempts' => (int) env('RATE_LIMIT_MAX_ATTEMPTS', 60),
+				'decay_seconds' => (int) env('RATE_LIMIT_DECAY_SECONDS', 60),
+				'key_prefix' => env('RATE_LIMIT_KEY_PREFIX', 'rate_limit_'),
+			],
+			'encrypt_cookies' => [
+				'except' => [],
+				'prefix' => env('ENCRYPT_COOKIE_PREFIX', 'enc_'),
+			],
+		];
+	}
 };
